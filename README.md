@@ -46,12 +46,9 @@ _____________________________________________
 ### Usages:
 
 	python wf.py -f <file> : Output all non-repeating words in the file  
-	python wf.py -d <directory> : Specify the file directory ,and perform   
-	the same operation for each file in the directory  
-	python wf.py -d -s <directory> :Recursively traverse all subdirectories  
-	 under the directory
-	python wf.py [-f|-d][-s][-n] : Output only the top <num> items.   
-	(default: n=10)
+	python wf.py -d <directory> : Specify the file directory ,and perform the same operation for each file in the directory  
+	python wf.py -d -s <directory> :Recursively traverse all subdirectories under the directory
+	python wf.py [-f|-d][-s][-n] : Output only the top <num> items. (default: n=10)
 ### Examples:
 	cd step1  
 	python wf.py -f gone_with_the_wind.txt
