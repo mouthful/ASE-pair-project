@@ -1,6 +1,6 @@
 # ASE
 How is the frequency of English 26 letters distributed in a novel? What are the words that often appear in a type of article? What is the most common vocabulary of a author? What are the most commonly used phrases in Harry Potter, and so on. There are some programs to solve this problem.
-## step0 *Outputs the frequency of the 26 letters in an English text file.*
+## step0: *Outputs the frequency of the 26 letters in an English text file.*
 
 ### Usage:
    	python wf.py [-c] [-n <num>] <path> 
@@ -9,7 +9,7 @@ _____________________________________________
     -n <num>: Output only the top <num> items. (default: n=10)
     <path>: The path to the input file if -d is not specified. 
 ### Examples:
-	cd step
+	cd step0
     python wf.py -c gone_with_the_wind.txt
     python wf.py -c -6 gone_with_the_wind.txt
 ### Output:
@@ -42,7 +42,7 @@ _____________________________________________
 	|h        |6.81%    |
 	-------------------
 	Time Consuming:0.177941
-## step1 *Output the top N most frequently occurring English words in a single file*
+## step1: *Output the top N most frequently occurring English words in a single file*
 ### Usages:
 
 	python wf.py -f <file> : Output all non-repeating words in the file  
@@ -217,6 +217,56 @@ _____________________________________________
 	|was         |1.26%       |
 	--------------------------
 	Time Consuming:0.081468
+
+## step2: *Meet the requirement--stop words*
+### Usages: 
+    python wf.py -x <stopwordfile> -f <file>
+### Examples:
+	cd step2
+	python wf.py -x stopword.txt -f gone_with_the_wind.txt
+### Output:
+	File name:gone_with_the_wind.txt
+	--------------------------
+	|      The Rank List      |
+	|words       |Frequency   |
+	|a           |1.81%       |
+	|in          |1.42%       |
+	|was         |1.41%       |
+	|i           |1.27%       |
+	|you         |1.24%       |
+	|he          |1.16%       |
+	|that        |1.08%       |
+	|had         |1.06%       |
+	|it          |1.06%       |
+	|s           |0.89%       |
+	--------------------------
+	Time Consuming:0.496648
+## step3: *Count words with high frequency*
+### Usage:
+	python wf.py -p <number> <path>: <number>--parameter  indicates the phrase consisting of how many words,   
+	<path>-- parameter is filename or directory 
+### Example:
+	cd step3  
+	python wf.py -p -2 gone_with_the_wind.txt  
+
+### Output:
+	File name:gone_with_the_wind.txt
+	---------------------------------------------
+	|               The Rank List               |
+	|Phrases              |Frequency            |
+	|of the               |0.48%                |
+	|in the               |0.47%                |
+	|and the              |0.32%                |
+	|she had              |0.30%                |
+	|to the               |0.23%                |
+	|it was               |0.22%                |
+	|she was              |0.21%                |
+	|on the               |0.21%                |
+	|he was               |0.18%                |
+	|and she              |0.18%                |
+	---------------------------------------------
+	Time Consuming:1.394913
+
 
 
 
