@@ -1,21 +1,21 @@
-import time
 import re
+import time
 from collections import Counter
-import operator as op
 import os
+import sys
+
+letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+          #,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+
 ###################################################################################
 #Name:count_letters
-#Inputs:file_name
-#       n : output the top N items in letters
-#       stopName: the file of stopwords skipped
-#       verbName: the file of verb dict
+#Inputs:file name
 #outputs:None
-#Author: ThomasY, changed by mouthful
-#Date:2018.10.28
+#Author: Thomas
+#Date:2018.10.22
 ###################################################################################
-letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 def CountLetters(file_name,n,stopName,verbName):
-    print("File name:" + file_name)
+    print("File name:" + os.path.abspath(file_name))
     if (stopName != None):
         stopflag = True
     else:
@@ -50,6 +50,8 @@ def CountLetters(file_name,n,stopName,verbName):
     t1 = time.clock()
     display(dicNum[:n],'character',totalNum,9)
     print("Time Consuming:%4f" % (t1 - t0))
+
+
 ###################################################################################
 #Name:count_words
 #Inputs:file name,the first n words, stopfile name
@@ -58,7 +60,7 @@ def CountLetters(file_name,n,stopName,verbName):
 #Date:2018.10.22
 ###################################################################################
 def CountWords(file_name,n,stopName,verbName):
-    print("File name:" + file_name)
+    print("File name:" + os.path.abspath(file_name))
     if (stopName != None):
         stopflag = True
     else:
@@ -99,7 +101,7 @@ def CountWords(file_name,n,stopName,verbName):
                 for word in verbDic[key]:
                     verbDicNum[key] += tempc[word]
                 totalNum += verbDicNum[key]
-        verbDicNum = sorted(dicNum.items(), key=lambda k: k[0])
+        verbDicNum = sorted(verbDicNum.items(), key=lambda k: k[0])
         verbDicNum = sorted(verbDicNum, key=lambda k: k[1], reverse=True)
     dicNum = sorted(dicNum.items(), key=lambda k:k[0])
     dicNum = sorted(dicNum, key=lambda k:k[1], reverse=True)
@@ -118,7 +120,7 @@ def CountWords(file_name,n,stopName,verbName):
 #Date:2018.10.22
 ###################################################################################
 def CountPhrases(file_name,n,stopName,verbName,k):
-    print("File name:" + file_name)
+    print("File name:" + os.path.abspath(file_name))
     totalNum = 0
     if (stopName != None):
         stopflag = True
@@ -173,23 +175,16 @@ def CountPhrases(file_name,n,stopName,verbName,k):
         for phrase in tempc.keys():
             if (',' not in phrase):
                 totalNum += 1
-                verba, verbb = phrase.split(' ')
-                if (verba in verbDic.keys() and verbb in verbDic.keys()):
-                    normPhrase = verbDic[verba] + ' ' + verbDic[verbb]
-                    changeFlag = True
-                elif (verba in verbDic.keys()):
-                    changeFlag = True
-                    normPhrase = verbDic[verba] + ' ' + verbb
-                elif (verbb in verbDic.keys()):
-                    changeFlag = True
-                    normPhrase =  verba + ' ' + verbDic[verbb]
+                verbList = phrase.split(' ')
+                normPhrase = verbList[0]
+                for verb in verbList[1:]:
+                    if verb in verbDic.keys():
+                        verb = verbDic[verb]
+                    normPhrase += ' ' + verb
+                if (normPhrase in dicNum.keys()):
+                    dicNum[normPhrase] += tempc[phrase]
                 else:
-                    changeFlag = False
-                if (changeFlag):
-                    if(normPhrase in dicNum.keys()):
-                        dicNum[normPhrase] += tempc[phrase]
-                    else:
-                        dicNum[normPhrase] = tempc[phrase]
+                    dicNum[normPhrase] = tempc[phrase]
     else:
         phrases = tempc.keys()
         for phrase in phrases:
@@ -210,7 +205,7 @@ def CountPhrases(file_name,n,stopName,verbName,k):
 #Date:2018.10.22
 ###################################################################################
 def CountVerbPre(file_name,n,stopName,verbName,preName):
-    print("File name:" + file_name)
+    print("File name:" + os.path.abspath(file_name))
     dicNum = {}
     totalNum = 0
     if (stopName != None):
@@ -276,16 +271,7 @@ def CountVerbPre(file_name,n,stopName,verbName,preName):
     t1 = time.clock()
     display(dicNum[:n], 'VerbPre',totalNum, 3)
     print("Time Consuming:%4f"%(t1-t0))
-###################################################################################
-#Name:display
-#Inputs:dicNum: a dict of data displayed in the screen
-#       type :
-#       totalNum:
-#       k:
-#outputs:None
-#Author: ThomasY, changed by mouthful
-#Date:2018.10.28
-###################################################################################
+
 def display(dicNum,type,totalNum,k):
     maxLen = 0
     if(not dicNum):
@@ -299,29 +285,25 @@ def display(dicNum,type,totalNum,k):
     print(formatstr.format('The Rank List'))
     formatstr = "|{:" + str(k*maxLen) + "}|{:<" + str(k*maxLen) + "}|"
     print(formatstr.format(type, "Frequency"))
-    if totalNum >0:
-        formatstr = "|{:" + str(k*maxLen) + "}|{:<" + str(k*maxLen) + ".2%}|"
+    formatstr = "|{:" + str(k*maxLen) + "}|{:<" + str(k*maxLen) + ".2%}|"
+    if totalNum > 0:
         for word, fre in dicNum:
             print(formatstr.format(word, fre/totalNum))
-        print("-" * int(2.18*k * maxLen))
+    print("-" * int(2.18*k * maxLen))
 
 ###################################################################################
-#Name:OperateInDir
-#Inputs:dicNum: a dict of data displayed in the screen
-#       n : output the top N items in dict
-#       stopName: the file of stopwords skipped
-#       verbName: the file of verb dict
-#       reflag:  whether to go through subdir
+#Name:CountWordsInDir
+#Inputs:directory name,flag, the first n words, stopfile name
 #outputs:None
-#Author: ThomasY, changed by mouthful
-#Date:2018.10.28
+#Author: Thomas
+#Date:2018.10.22
 ###################################################################################
 def OperateInDir(Fuc,Dir_name,n,stopName,verbName,reflag,*arges):
-    for path, _, filelist in os.walk(Dir_name):
-        for file in filelist:
-            if(arges):
-                Fuc(os.path.join(path, file), n, stopName, verbName,arges[0])
-            else:
-                Fuc(os.path.join(path, file),n,stopName,verbName)
-        if not reflag:
-            break
+        for path, _, filelist in os.walk(Dir_name):
+            for file in filelist:
+                if(arges):
+                    Fuc(os.path.join(path, file), n, stopName, verbName,arges[0])
+                else:
+                    Fuc(os.path.join(path, file),n,stopName,verbName)
+            if not reflag:
+                break
