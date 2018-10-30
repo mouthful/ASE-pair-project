@@ -20,16 +20,6 @@ if(__name__ == '__main__'):
             step0.OperateInDir(step0.CountLetters, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag)
         else:
             step0.CountLetters(args.path, int(args.num), args.stopFile, args.verbFile)
-    if (args.phraseNum):
-        if (args.dirFlag):
-            step0.OperateInDir(step0.CountPhrases, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag,int(args.phraseNum))
-        else:
-            step0.CountPhrases(args.path, int(args.num), args.stopFile, args.verbFile,int(args.phraseNum))
-    if (args.preName):
-        if (args.dirFlag):
-            step0.OperateInDir(step0.CountVerbPre, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag,args.preName)
-        else:
-            step0.CountVerbPre(args.path, int(args.num), args.stopFile, args.verbFile,args.preName)
     else:
         print("Error: Please input the operation type (-f|-q|-p|-c)")
 
