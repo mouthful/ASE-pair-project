@@ -31,7 +31,7 @@ if(__name__ == '__main__'):
             step3.OperateInDir(step3.CountWords,args.path, int(args.num), args.stopFile, args.verbFile,args.reFlag)
         else:
             step3.CountWords(args.path, int(args.num), args.stopFile, args.verbFile)
-    if (args.phraseNum):
+    elif (args.phraseNum):
         if (args.dirFlag):
             step3.OperateInDir(step3.CountPhrases, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag,int(args.phraseNum))
         else:

@@ -26,21 +26,22 @@ if(__name__ == '__main__'):
             step5.OperateInDir(step5.CountLetters, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag)
         else:
             step5.CountLetters(args.path, int(args.num), args.stopFile, args.verbFile)
-    if (args.countWords):
-        if(args.dirFlag):
-            step5.OperateInDir(step5.CountWords,args.path, int(args.num), args.stopFile, args.verbFile,args.reFlag)
+    elif (args.countWords):
+        if (args.dirFlag):
+            step5.OperateInDir(step5.CountWords, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag)
         else:
             step5.CountWords(args.path, int(args.num), args.stopFile, args.verbFile)
-    if (args.phraseNum):
+    elif (args.phraseNum):
         if (args.dirFlag):
-            step5.OperateInDir(step5.CountPhrases, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag,int(args.phraseNum))
+            step5.OperateInDir(step5.CountPhrases, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag,
+                         int(args.phraseNum))
         else:
-            step5.CountPhrases(args.path, int(args.num), args.stopFile, args.verbFile,int(args.phraseNum))
-    if (args.preName):
+            step5.CountPhrases(args.path, int(args.num), args.stopFile, args.verbFile, int(args.phraseNum))
+    elif (args.preName):
         if (args.dirFlag):
-            step5.OperateInDir(step5.CountVerbPre, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag,args.preName)
+            step5.OperateInDir(step5.CountVerbPre, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag,
+                         args.preName)
         else:
-            step5.CountVerbPre(args.path, int(args.num), args.stopFile, args.verbFile,args.preName)
+            step5.CountVerbPre(args.path, int(args.num), args.stopFile, args.verbFile, args.preName)
     else:
         print("Error: Please input the operation type (-f|-q|-p|-c)")
-

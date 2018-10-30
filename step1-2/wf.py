@@ -28,7 +28,7 @@ if(__name__ == '__main__'):
             step1.OperateInDir(step1.CountLetters, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag)
         else:
             step1.CountLetters(args.path, int(args.num), args.stopFile, args.verbFile)
-    if (args.countWords):
+    elif (args.countWords):
         if(args.dirFlag):
             step1.OperateInDir(step1.CountWords,args.path, int(args.num), args.stopFile, args.verbFile,args.reFlag)
         else:

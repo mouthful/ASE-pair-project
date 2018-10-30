@@ -30,4 +30,6 @@ if(__name__ == '__main__'):
             step0.OperateInDir(step0.CountVerbPre, args.path, int(args.num), args.stopFile, args.verbFile, args.reFlag,args.preName)
         else:
             step0.CountVerbPre(args.path, int(args.num), args.stopFile, args.verbFile,args.preName)
+    else:
+        print("Error: Please input the operation type (-f|-q|-p|-c)")
 
