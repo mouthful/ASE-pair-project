@@ -53,9 +53,9 @@ _____________________________________________
 	python wf.py [-f|-d][-s][-n] : Output only the top <num> items. (default: n=10)
 ### Examples:
 	cd step1  
-	python wf.py -f gone_with_the_wind.txt
-	python wf.py -d examples
-	python wf.py -d -s examples
+	python wf.py -f ../txtfiles/gone_with_the_wind.txt
+	python wf.py -d ../txtfiles/examples
+	python wf.py -d -s ../txtfiles/examples
 ### Output:
 	File name:gone_with_the_wind.txt
 	-------------------
@@ -225,7 +225,7 @@ _____________________________________________
     python wf.py -x <stopwordfile> -f <file> :Skip these words when counting frequencies
 ### Examples:
 	cd step2
-	python wf.py -x stopword.txt -f gone_with_the_wind.txt
+	python wf.py -x stopword.txt -f ../txtfiles/gone_with_the_wind.txt
 ### Output:
 	File name:gone_with_the_wind.txt
 	--------------------------
@@ -249,7 +249,7 @@ _____________________________________________
 	<path>-- parameter is filename or directory 
 ### Example:
 	cd step3  
-	python wf.py -p -2 gone_with_the_wind.txt  
+	python wf.py -p -2 ../txtfiles/gone_with_the_wind.txt  
 
 ### Output:
 	File name:gone_with_the_wind.txt
@@ -303,7 +303,7 @@ The definition of "Verb Phrases" is as follows:
     python wf.py -q <preposition-list> -v <verb-dict> <path>
 ### Example:
 
-    python main.py -q prepositions.txt -v verbs.txt gone_with_the_wind.txt
+    python main.py -q prepositions.txt -v verbs.txt ../txtfiles/gone_with_the_wind.txt
 ### Output:
 	File name:gone_with_the_wind.txt
 	----------------------------------------------------
