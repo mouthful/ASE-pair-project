@@ -1,5 +1,7 @@
-# ASE
-How is the frequency of English 26 letters distributed in a novel? What are the words that often appear in a type of article? What is the most common vocabulary of a author? What are the most commonly used phrases in Harry Potter, and so on. There are some programs to solve this problem.
+# ASE assignment--pair project
+This is a team assignment from our ASE course, and the project was achieved by our team. [Here](https://www.cnblogs.com/xinz/archive/2011/11/27/2265000.html) is source address of the task.
+
+> How is the frequency of English 26 letters distributed in a novel? What are the words that often appear in a type of article? What is the most common vocabulary of a author? What are the most commonly used phrases in Harry Potter, and so on. There are some programs to solve this problem.
 ## step0: *Outputs the frequency of the 26 letters in an English text file.*
 
 ### Usage:
