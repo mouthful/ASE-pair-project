@@ -1,4 +1,8 @@
 import time
+import re
+from collections import Counter
+import operator as op
+import os
 ###################################################################################
 #Name:count_letters
 #Inputs:file_name
@@ -69,10 +73,11 @@ def display(dicNum,type,totalNum,k):
     print(formatstr.format('The Rank List'))
     formatstr = "|{:" + str(k*maxLen) + "}|{:<" + str(k*maxLen) + "}|"
     print(formatstr.format(type, "Frequency"))
-    formatstr = "|{:" + str(k*maxLen) + "}|{:<" + str(k*maxLen) + ".2%}|"
-    for word, fre in dicNum:
-        print(formatstr.format(word, fre/totalNum))
-    print("-" * int(2.18*k * maxLen))
+    if totalNum >0:
+        formatstr = "|{:" + str(k*maxLen) + "}|{:<" + str(k*maxLen) + ".2%}|"
+        for word, fre in dicNum:
+            print(formatstr.format(word, fre/totalNum))
+        print("-" * int(2.18*k * maxLen))
 
 ###################################################################################
 #Name:OperateInDir
