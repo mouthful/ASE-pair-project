@@ -45,7 +45,7 @@ _____________________________________________
 ## step1: *Output the top N most frequently occurring English words in a single file*
 ### Usages:
 
-	python wf.py -f <file> : Output all non-repeating words in the file  
+	python wf.py -f <path> : Output all non-repeating words in the file  
 	python wf.py -d <directory> : Specify the file directory ,and perform the same operation for each file in the directory  
 	python wf.py -d -s <directory> :Recursively traverse all subdirectories under the directory
 	python wf.py [-f|-d][-s][-n] : Output only the top <num> items. (default: n=10)
@@ -220,7 +220,7 @@ _____________________________________________
 
 ## step2: *Meet the requirement--stop words*
 ### Usages: 
-    python wf.py -x <stopwordfile> -f <file>
+    python wf.py -x <stopwordfile> -f <file> :Skip these words when counting frequencies
 ### Examples:
 	cd step2
 	python wf.py -x stopword.txt -f gone_with_the_wind.txt
@@ -241,7 +241,7 @@ _____________________________________________
 	|s           |0.89%       |
 	--------------------------
 	Time Consuming:0.496648
-## step3: *Count words with high frequency*
+## step3: *Find the phrase that appears most frequently*
 ### Usage:
 	python wf.py -p <number> <path>: <number>--parameter  indicates the phrase consisting of how many words,   
 	<path>-- parameter is filename or directory 
@@ -266,6 +266,61 @@ _____________________________________________
 	|and she              |0.18%                |
 	---------------------------------------------
 	Time Consuming:1.394913
+## step4: *Put the verbs into their prototypes, then count the frequencies*
+### Usage:
+    python wf.py -p <num> -v <verb file> <path>
+### Example:
+	cd step4
+	python wf.py -p 2 -v verbs.txt
+### Output:
+	File name:gone_with_the_wind.txt
+	----------------------------------------------------
+	|                  The Rank List                  |
+	|Phrases                 |Frequency               |
+	|she have                |0.85%                   |
+	|have be                 |0.72%                   |
+	|it be                   |0.69%                   |
+	|she be                  |0.65%                   |
+	|be a                    |0.63%                   |
+	|there be                |0.58%                   |
+	|he be                   |0.57%                   |
+	|do not                  |0.45%                   |
+	|to be                   |0.45%                   |
+	|go to                   |0.45%                   |
+	----------------------------------------------------
+	Time Consuming:1.676186
+## step5: *Counting "Verb Phrases"*
+The definition of "Verb Phrases" is as follows:
+
+	VerbPhrase := Verb + Spaces + Preposition
+	Spaces := Space+
+	Space := ' ' | '\t' | '\r' | '\n'
+	Preposition := <any one from the list of prepositions>
+	Verb := <any one in any tense FROM THE DICTIONARY>
+### Usage:
+    python wf.py -q <preposition-list> -v <verb-dict> <path>
+### Example:
+
+    python main.py -q prepositions.txt -v verbs.txt gone_with_the_wind.txt
+### Output:
+	File name:gone_with_the_wind.txt
+	----------------------------------------------------
+	|                  The Rank List                  |
+	|VerbPre                 |Frequency               |
+	|go to                   |0.45%                   |
+	|want to                 |0.27%                   |
+	|be in                   |0.25%                   |
+	|think of                |0.23%                   |
+	|try to                  |0.23%                   |
+	|have to                 |0.23%                   |
+	|look at                 |0.17%                   |
+	|come to                 |0.16%                   |
+	|back to                 |0.11%                   |
+	|be as                   |0.11%                   |
+	----------------------------------------------------
+	Time Consuming:1.449712
+
+
 
 
 
